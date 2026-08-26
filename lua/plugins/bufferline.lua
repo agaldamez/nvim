@@ -19,14 +19,15 @@ return {
         options = {
           style_preset = bufferline.style_preset.no_italic, -- no italics on the selected tab
           indicator = { style = "icon", icon = "▎" },       -- pink-ish bar on the left of the active tab
-          show_buffer_close_icons = false,                  -- no "x" on each tab (right-click closes instead)
+          show_buffer_close_icons = true,                   -- no "x" on each tab (right-click closes instead)
           show_close_icon = false,                          -- no "x" on the far right of the tabline
           close_command = buffers.close_tab,                -- what a close-icon click would run
           right_mouse_command = buffers.close_tab,          -- right-click a tab to close it
+          max_name_length = 30,                             -- increase value to allow longer file names (default 18)
           offsets = {
             {
               filetype = "neo-tree",
-              text = "File Explorer", -- label in the gap above neo-tree
+              text = "Explorer", -- label in the gap above neo-tree
               highlight = "Directory",
               separator = true,
             },
