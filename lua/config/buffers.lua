@@ -1,8 +1,26 @@
--- Shared buffer close / quit helpers.
--- Right-click (bufferline), ZZ/ZQ, and :q/:wq/:x all use this module.
+-- ~/.config/nvim/lua/config/buffers.lua
+-- Shared buffer close / quit helpers (bufferline, ZZ/ZQ, :q/:wq/:x).
 
 local M = {}
 
+-- Helpers
+local function is_file_buffer(bufnr)
+  return vim.bo[bufnr].filetype ~= "neo-tree"
+    and vim.api.nvim_buf_get_name(bufnr) ~= ""
+end
+
+-- Count listed file buffers (excludes neo-tree and [No Name]).
+local function file_buffer_count()
+  local n = 0
+  for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+    if is_file_buffer(buf.bufnr) then
+      n = n + 1
+    end
+  end
+  return n
+end
+
+-- close_tab
 -- Close a buffer without destroying the split next to neo-tree.
 -- :bdelete on the *current* buffer also closes that window, which would
 -- leave only the explorer (full width) while other tabs still exist.
@@ -13,10 +31,7 @@ function M.close_tab(bufnr)
   -- Another listed *named* file we can show in this window instead.
   local replacement
   for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
-    if buf.bufnr ~= bufnr
-      and vim.bo[buf.bufnr].filetype ~= "neo-tree"
-      and vim.api.nvim_buf_get_name(buf.bufnr) ~= ""
-    then
+    if buf.bufnr ~= bufnr and is_file_buffer(buf.bufnr) then
       replacement = buf.bufnr
       break
     end
@@ -43,18 +58,7 @@ function M.close_tab(bufnr)
   end
 end
 
-local function file_buffer_count()
-  local n = 0
-  for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
-    if vim.bo[buf.bufnr].filetype ~= "neo-tree"
-      and vim.api.nvim_buf_get_name(buf.bufnr) ~= ""
-    then
-      n = n + 1
-    end
-  end
-  return n
-end
-
+-- quit
 -- write=true  → like ZZ / :wq / :x
 -- bang=true   → like ZQ / :q!
 function M.quit(opts)
@@ -82,6 +86,8 @@ function M.quit(opts)
   end
 end
 
+-- setup
+-- User commands and command-line abbreviations for :q / :wq / :x.
 function M.setup()
   vim.api.nvim_create_user_command("Q", function(o)
     M.quit({ bang = o.bang })

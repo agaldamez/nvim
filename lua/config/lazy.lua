@@ -1,6 +1,7 @@
 -- ~/.config/nvim/lua/config/lazy.lua
--- Bootstraps lazy.nvim (clones it on first launch) and loads every plugin spec under lua/plugins/.
+-- Bootstrap lazy.nvim and load plugin specs from lua/plugins/.
 
+-- Bootstrap (clone lazy.nvim on first launch)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local out = vim.fn.system({
@@ -19,11 +20,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- `import = "plugins"` tells lazy to load every .lua file in lua/plugins/.
--- Each of those files returns a table of plugin specs.
+-- Each lua/plugins/*.lua file returns a table of plugin specs.
 require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-  },
-  checker = { enabled = false }, -- don't auto-check for updates; run :Lazy update manually
+  import = "plugins",
+  checker = { enabled = false }, -- run :Lazy update manually
 })

@@ -5,12 +5,9 @@ local opt = vim.opt
 
 -- Display
 opt.background = "dark"     -- tell colorschemes to use their dark palette
-
 opt.number = true           -- show absolute line numbers
 opt.relativenumber = true   -- show relative line numbers
-
 opt.linebreak = true        -- don't wrap in the middle of a word
-
 opt.signcolumn = "yes"      -- keep the gutter stable (prevents text jump with gitsigns)
 opt.showmode = false        -- lualine already shows the mode; avoid the extra `-- INSERT --`
 opt.cursorline = true       -- highlight the current line
@@ -25,7 +22,6 @@ opt.shiftround = true       -- >> and << snap indent to multiples of shiftwidth
 opt.swapfile = false        -- no `*.swp` files
 opt.undofile = true         -- persistent undo across sessions
 opt.autoread = true         -- reload when the file changes on disk
-
 
 -- Searching
 opt.ignorecase = true       -- case-insensitive search by default

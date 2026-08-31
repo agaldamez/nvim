@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins/devicons.lua
 -- Material-style file icons (fork of nvim-web-devicons).
 -- Requires Nerd Font >= 3.2. Loads early so bufferline/lualine/neo-tree cache the right glyphs.
 return {
