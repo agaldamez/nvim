@@ -9,8 +9,10 @@ return {
     ft = { "python", "cython" },
   },
   {
-    "towolf/vim-helm",
-    ft = { "helm", "yaml.helm-values" },
+    -- Detects Helm templates (ft=helm) and values files (ft=yaml.helm-values).
+    "qvalentin/helm-ls.nvim",
+    ft = "helm",
+    opts = {},
   },
   {
     "hashivim/vim-terraform",
