@@ -8,8 +8,10 @@ return {
     dependencies = { "DaikyXendo/nvim-material-icon" }, -- file-type icons on tabs
     lazy = false,
     keys = {
-      { "<C-PageDown>", "<cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
-      { "<C-PageUp>", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous tab" },
+      { "<C-PageDown>", "<cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
+      { "<C-PageUp>", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous buffer" },
+      { "<C-S-PageDown>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer right" },
+      { "<C-S-PageUp>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer left" },
     },
     opts = function()
       local bufferline = require("bufferline")
