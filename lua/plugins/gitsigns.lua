@@ -20,7 +20,7 @@ return {
         end
 
         -- Navigation
-        map('n', ']c', function()
+        map('n', ']c', function() -- Next hunk: ]c
           if vim.wo.diff then
             vim.cmd.normal({']c', bang = true})
           else
@@ -28,7 +28,7 @@ return {
           end
         end)
 
-        map('n', '[c', function()
+        map('n', '[c', function() -- Previous hunk: [c
           if vim.wo.diff then
             vim.cmd.normal({'[c', bang = true})
           else
@@ -42,29 +42,27 @@ return {
 
         map('n', '<leader>hS', gitsigns.stage_buffer)
         map('n', '<leader>hR', gitsigns.reset_buffer)
+
         map('n', '<leader>hp', gitsigns.preview_hunk)
         map('n', '<leader>hi', gitsigns.preview_hunk_inline)
 
-        map('n', '<leader>hb', function()
+        map('n', '<leader>hb', function() -- Full commit float: sha, message, author and date
           gitsigns.blame_line({ full = true })
         end)
 
-        map('n', '<leader>hd', gitsigns.diffthis)
-
-        map('n', '<leader>hD', function()
+        map('n', '<leader>hd', gitsigns.diffthis) -- Diff against the index: close with :only
+        map('n', '<leader>hD', function()         -- Diff against HEAD~
           gitsigns.diffthis('~')
         end)
 
-        -- hunks in all changed files in the repo
-        map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-
-        -- hunks in the current file only. use :cclose to close the quickfix list.
-        -- snapshot only: press again to refresh after more edits. :copen to open view.
-        map('n', '<leader>hq', gitsigns.setqflist)
+        -- Note: Use :cclose to close the quickfix list.
+        -- Note: Snapshot only: press again to refresh after more edits. :copen to open view.
+        map('n', '<leader>hQ', function() gitsigns.setqflist('all') end) -- Hunks in every modified file in the repo
+        map('n', '<leader>hq', gitsigns.setqflist)                       -- Hunks in this buffer only
 
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-        map('n', '<leader>tw', gitsigns.toggle_word_diff)
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame) -- Enable/disable: git blame at end of line
+        map('n', '<leader>tw', gitsigns.toggle_word_diff)          -- Highlight word differences
 
         -- Text object
         map({'o', 'x'}, 'ih', gitsigns.select_hunk)
