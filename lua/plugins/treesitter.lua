@@ -1,4 +1,4 @@
---
+-- ~/.config/nvim/lua/plugins/treesitter.lua
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -6,7 +6,24 @@ return {
     lazy = false,
     build = ":TSUpdate",
     opts = {
-      ensure_installed = { "markdown", "markdown_inline", "helm", "yaml" },
+      ensure_installed = {
+          "bash",
+          "diff",
+          "dockerfile",
+          "go",
+          "gomod",
+          "hcl",  -- hashicorp
+          "helm",
+          "json",
+          "lua",
+          "markdown",
+          "markdown_inline",
+          "python",
+          "regex",
+          "tcl",
+          "terraform",
+          "yaml",
+      },
       highlight = { enable = true },
     },
     -- Apply opts: install listed parsers and enable modules (e.g. highlight).

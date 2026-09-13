@@ -19,23 +19,4 @@ return {
       vim.cmd [[colorscheme tokyodark]]
     end,
   },
-  {
-    "EdenEast/nightfox.nvim",
-    enabled = false,
-    priority = 1000,
-    lazy = false,
-    config = function()
-      vim.cmd.colorscheme("nightfox")
-    end,
-  },
-  {
-    "tomasr/molokai",
-    enabled = false,
-    priority = 1000,
-    lazy = false,
-    config = function()
-      vim.o.background = "dark"
-      vim.cmd.colorscheme("molokai")
-    end,
-  },
 }
