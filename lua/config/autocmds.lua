@@ -61,3 +61,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.expandtab = true
   end,
 })
+
+-- Wipe leftover [No Name] (#) only when opening a real file, and only if still unnamed.
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local alt = vim.fn.bufnr("#")
+    if alt > 0 and vim.api.nvim_buf_get_name(alt) == "" then
+      pcall(vim.api.nvim_buf_delete, alt, { force = true })
+    end
+  end,
+})

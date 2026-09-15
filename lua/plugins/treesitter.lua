@@ -14,6 +14,7 @@ return {
           "gomod",
           "hcl",  -- hashicorp
           "helm",
+          "html",
           "json",
           "lua",
           "markdown",
