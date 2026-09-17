@@ -14,8 +14,16 @@ return {
       { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Telescope help tags" },
     },
     config = function()
+      local actions = require("telescope.actions")
       require("telescope").setup({
         -- extensions, defaults, pickers — optional
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = actions.close, -- close on first Esc press
+            },
+          },
+        },
       })
     end,
   },
