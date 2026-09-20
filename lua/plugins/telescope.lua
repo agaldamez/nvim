@@ -7,6 +7,7 @@ return {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
+    cmd = "Telescope", -- load plugin on cmd line
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Telescope find files" },
       { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope live grep" },
