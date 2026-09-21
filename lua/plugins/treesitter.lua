@@ -32,4 +32,9 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
+-- Jinja2: A standalone treesitter parser
+  {
+    "geigerzaehler/tree-sitter-jinja2",
+    config = true,
+  },
 }
