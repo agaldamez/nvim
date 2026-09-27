@@ -7,5 +7,6 @@ vim.g.mapleader = " "
 
 require("config.options")   -- editor settings   (was `set ...`)
 require("config.keymaps")   -- key mappings       (was `map ...`)
-require("config.autocmds")  -- autocommands + diff colors
+require("config.terminal")  -- terminal toggle (<leader>`)
+require("config.autocmds")  -- autocommands
 require("config.lazy")      -- bootstrap lazy.nvim + load everything in lua/plugins/
