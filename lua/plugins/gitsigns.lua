@@ -10,6 +10,9 @@ return {
       },
       -- default formatter already uses relative time:
       -- "Alice, 3 hours ago - commit message"
+      preview_config = {
+        border = "rounded",
+      },
       on_attach = function(bufnr)
         local gitsigns = require('gitsigns')
 
