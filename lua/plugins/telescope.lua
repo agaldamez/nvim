@@ -19,9 +19,15 @@ return {
       require("telescope").setup({
         -- extensions, defaults, pickers — optional
         defaults = {
+          history = {
+            path = vim.fn.stdpath("data") .. "/telescope_history",
+            limit = 100,
+          },
           mappings = {
             i = {
               ["<esc>"] = actions.close, -- close on first Esc press
+              ["<C-n>"] = actions.cycle_history_next,
+              ["<C-p>"] = actions.cycle_history_prev,
             },
           },
         },
