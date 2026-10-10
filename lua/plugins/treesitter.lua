@@ -7,6 +7,7 @@ return {
     build = ":TSUpdate",
     opts = {
       ensure_installed = {
+          "awk",
           "bash",
           "diff",
           "dockerfile",
@@ -19,6 +20,7 @@ return {
           "lua",
           "markdown",
           "markdown_inline",
+          "perl",
           "python",
           "regex",
           "tcl",
