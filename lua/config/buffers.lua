@@ -20,6 +20,15 @@ local function file_buffer_count()
   return n
 end
 
+-- Normal (non-floating, non-neo-tree) windows in the current tab page.
+local function editor_wins()
+  return vim.tbl_filter(function(win)
+    local buf = vim.api.nvim_win_get_buf(win)
+    return vim.api.nvim_win_get_config(win).relative == ""
+      and vim.bo[buf].filetype ~= "neo-tree"
+  end, vim.api.nvim_tabpage_list_wins(0))
+end
+
 -- close_tab
 -- Close a buffer without destroying the split next to neo-tree.
 -- :bdelete on the *current* buffer also closes that window, which would
@@ -27,6 +36,12 @@ end
 -- `bdelete!` discards unsaved edits; the tab's modified marker is the warning.
 function M.close_tab(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
+
+  -- Other panes stay open: :bdelete closes this file's split(s) and nothing more.
+  if #vim.fn.win_findbuf(bufnr) < #editor_wins() then
+    vim.cmd("bdelete! " .. bufnr)
+    return
+  end
 
   -- Another listed *named* file we can show in this window instead.
   local replacement
@@ -75,6 +90,15 @@ function M.quit(opts)
     vim.cmd("update") -- write only if modified
   elseif vim.bo[bufnr].modified and not opts.bang then
     vim.notify("No write since last change (add ! to override)", vim.log.levels.ERROR)
+    return
+  end
+
+  -- In a split: close just this pane, and the file if nothing else shows it.
+  if #editor_wins() > 1 then
+    vim.cmd("close")
+    if #vim.fn.win_findbuf(bufnr) == 0 then
+      vim.cmd("bdelete! " .. bufnr)
+    end
     return
   end
 
